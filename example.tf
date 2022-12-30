@@ -32,8 +32,12 @@ resource "huaweicloud_dns_recordset" "dns_recordset" {
 
 # ----- Create CDN domain -----
 
-variable "domain_name" {}
-variable "origin_server" {}
+variable "domain_name" {
+  default = "tf.buron.social"
+}
+variable "origin_server" {
+  default = "159.138.115.199"
+}
 
 resource "huaweicloud_cdn_domain" "domain_1" {
   name = var.domain_name
@@ -43,10 +47,5 @@ resource "huaweicloud_cdn_domain" "domain_1" {
     origin      = var.origin_server
     origin_type = "ipaddr"
     active      = 1
-  }
-
-  tags = {
-    key = "val"
-    foo = "bar"
   }
 }
