@@ -15,7 +15,7 @@ provider "huaweicloud" {}
 resource "huaweicloud_dns_zone" "example_zone" {
   name        = "tf.buron.social"
   email       = "fernando.buron@mail.udp.cl"
-  description = "buenastardes"
+  description = "DNS Public Zone created from Terraform"
   ttl         = 6000
   zone_type   = "public"
 }
@@ -27,4 +27,26 @@ resource "huaweicloud_dns_recordset" "dns_recordset" {
   ttl         = 3000
   type        = "A"
   records     = ["159.138.115.199"]
+}
+
+
+# ----- Create CDN domain -----
+
+variable "domain_name" {}
+variable "origin_server" {}
+
+resource "huaweicloud_cdn_domain" "domain_1" {
+  name = var.domain_name
+  type = "web"
+
+  sources {
+    origin      = var.origin_server
+    origin_type = "ipaddr"
+    active      = 1
+  }
+
+  tags = {
+    key = "val"
+    foo = "bar"
+  }
 }
