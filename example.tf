@@ -2,7 +2,7 @@ terraform {
   required_providers {
     huaweicloud = {
       source  = "huaweicloud/huaweicloud"
-      version = "~> 1.26.0"
+      version = ">= 1.26.0"
     }
   }
 }
@@ -43,6 +43,7 @@ variable "origin_server" {
 resource "huaweicloud_cdn_domain" "domain_1" {
   name = var.domain_name
   type = "web"
+  service_area = "outside_mailand_china"
 
   sources {
     origin      = var.origin_server
@@ -62,21 +63,3 @@ resource "huaweicloud_cdn_domain" "domain_1" {
 
 # ----- Create WAF domain ----- https://registry.terraform.io/providers/huaweicloud/huaweicloud/latest/docs/resources/waf_dedicated_instance
 
-variable az_name {}
-variable ecs_flavor_id {}
-variable vpc_id {}
-variable subnet_id {}
-variable security_group_id {}
-
-resource "huaweicloud_waf_dedicated_instance" "instance_1" {
-  name               = "instance_1"
-  available_zone     = var.az_name
-  specification_code = "waf.payperuse.domain"
-  ecs_flavor         = var.ecs_flavor_id
-  vpc_id             = var.vpc_id
-  subnet_id          = var.subnet_id
-
-  security_group = [
-    var.security_group_id
-  ]
-}
