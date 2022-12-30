@@ -10,10 +10,16 @@ terraform {
 # Configure the HuaweiCloud Provider
 provider "huaweicloud" {}
 
+variable "domain_name" {
+  default = "tf.buron.social"
+}
+variable "origin_server" {
+  default = "159.138.115.199"
+}
 
 # ----- Create DNS and Record Set ----- https://registry.terraform.io/providers/huaweicloud/huaweicloud/latest/docs/resources/dns_ptrrecord
 resource "huaweicloud_dns_zone" "example_zone" {
-  name        = "tf.buron.social"
+  name        = var.domain_name
   email       = "fernando.buron@mail.udp.cl"
   description = "DNS Public Zone created from Terraform"
   ttl         = 6000
@@ -26,18 +32,12 @@ resource "huaweicloud_dns_recordset" "dns_recordset" {
   description = "DNS Record from Terraform"
   ttl         = 3000
   type        = "A"
-  records     = ["159.138.115.199"]
+  records     = [var.origin_server]
 }
 
 
 # ----- Create CDN domain ----- https://registry.terraform.io/providers/huaweicloud/huaweicloud/latest/docs/resources/cdn_domain
 
-variable "domain_name" {
-  default = "tf.buron.social"
-}
-variable "origin_server" {
-  default = "159.138.115.199"
-}
 
 # ----- Configure CDN domain ----- 
 resource "huaweicloud_cdn_domain" "domain_1" {
