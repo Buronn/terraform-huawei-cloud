@@ -55,7 +55,7 @@ resource "huaweicloud_cdn_domain" "domain_1" {
 # ----- Add record set to DNS ----- 
 resource "huaweicloud_dns_recordset" "cdn_recordset" {
   zone_id     = huaweicloud_dns_zone.example_zone.id
-  name        = "cdn.tf.buron.social"
+  name        = var.domain_name
   description = "DNS Record from Terraform"
   ttl         = 3000
   type        = "CNAME"
