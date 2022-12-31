@@ -34,32 +34,3 @@ resource "huaweicloud_dns_recordset" "dns_recordset" {
   type        = "A"
   records     = [var.origin_server]
 }
-
-
-# ----- Create CDN domain ----- https://registry.terraform.io/providers/huaweicloud/huaweicloud/latest/docs/resources/cdn_domain
-
-
-# ----- Configure CDN domain ----- 
-resource "huaweicloud_cdn_domain" "domain_1" {
-  name = var.domain_name
-  type = "web"
-  service_area = "outside_mainland_china"
-
-  sources {
-    origin      = var.origin_server
-    origin_type = "ipaddr"
-    active      = 1
-  }
-
-  cache_settings {
-    rules {
-      rule_type = 0
-      ttl       = 180
-      ttl_type  = 4
-      priority  = 2
-    }
-  }
-}
-
-# ----- Create WAF domain ----- https://registry.terraform.io/providers/huaweicloud/huaweicloud/latest/docs/resources/waf_dedicated_instance
-
