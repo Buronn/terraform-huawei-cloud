@@ -43,7 +43,7 @@ resource "huaweicloud_dns_recordset" "dns_recordset" {
 resource "huaweicloud_cdn_domain" "domain_1" {
   name = var.domain_name
   type = "web"
-  service_area = "outside_mailand_china"
+  service_area = "outside_mainland_china"
 
   sources {
     origin      = var.origin_server
