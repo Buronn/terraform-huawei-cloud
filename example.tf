@@ -11,7 +11,7 @@ terraform {
 provider "huaweicloud" {}
 
 variable "domain_name" {
-  default = "tf.buron.social"
+  default = "tf.fburon.cl"
 }
 variable "origin_server" {
   default = "159.138.115.199"
@@ -20,7 +20,7 @@ variable "origin_server" {
 # ----- Create DNS ----- https://registry.terraform.io/providers/huaweicloud/huaweicloud/latest/docs/resources/dns_ptrrecord
 resource "huaweicloud_dns_zone" "example_zone" {
   name        = var.domain_name
-  email       = "fernando.buron@mail.udp.cl"
+  email       = "contacto.buron@gmail.com"
   description = "DNS Public Zone created from Terraform"
   ttl         = 6000
   zone_type   = "public"
