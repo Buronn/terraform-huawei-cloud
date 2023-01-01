@@ -64,3 +64,14 @@ resource "huaweicloud_dns_recordset" "cdn_recordset" {
 
 # ----- Create WAF domain ----- https://registry.terraform.io/providers/huaweicloud/huaweicloud/latest/docs/resources/waf_dedicated_instance
 
+resource "huaweicloud_waf_domain" "domain_1" {
+  domain           = "www.example.com"
+  proxy            = true
+
+  server {
+    client_protocol = "HTTP"
+    server_protocol = "HTTP"
+    address         = var.origin_server
+    port            = 8080
+  }
+}
